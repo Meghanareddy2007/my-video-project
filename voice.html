@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Voice Message 🎙</title>
+<style>
+body{
+    text-align:center;
+    background:linear-gradient(to right,#ff758c,#ff7eb3);
+    color:white;
+    padding-top:100px;
+}
+button{
+    padding:15px 25px;
+    margin:20px;
+    border:none;
+    border-radius:25px;
+    font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<h1>🎙 Record Your Voice Message</h1>
+
+<button onclick="startRecording()">Start Recording</button>
+<button onclick="stopRecording()">Stop Recording</button>
+
+<br><br>
+<audio id="audioPlayback" controls></audio>
+
+<script>
+let mediaRecorder;
+let audioChunks=[];
+
+async function startRecording(){
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    mediaRecorder=new MediaRecorder(stream);
+    mediaRecorder.start();
+    mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+}
+
+function stopRecording(){
+    mediaRecorder.stop();
+    mediaRecorder.onstop=()=>{
+        const blob=new Blob(audioChunks);
+        const url=URL.createObjectURL(blob);
+        document.getElementById("audioPlayback").src=url;
+        audioChunks=[];
+    }
+}
+</script>
+
+</body>
+</html>
