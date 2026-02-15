@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Letter</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle at top left, #fda1a1, #fbcfc2, #fbc2d3);
+    overflow:hidden;
+    position:relative;
+}
+
+/* Soft floating light circles */
+body::before,
+body::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.3);
+    filter:blur(100px);
+    animation:moveGlow 10s infinite alternate;
+}
+
+body::before{
+    top:10%;
+    left:10%;
+}
+
+body::after{
+    bottom:10%;
+    right:10%;
+}
+
+@keyframes moveGlow{
+    0%{transform:translate(0,0);}
+    100%{transform:translate(50px,50px);}
+}
+
+/* Confetti effect */
+.confetti{
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:red;
+    animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+    0%{transform:translateY(-100vh) rotate(0deg);}
+    100%{transform:translateY(100vh) rotate(360deg);}
+}
+
+/* <!-- Confetti pieces -->
+<div class="confetti" style="left:10%; background:#ff6b6b; animation-delay:0s;"></div>
+<div class="confetti" style="left:30%; background:#ffd93d; animation-delay:1s;"></div>
+<div class="confetti" style="left:50%; background:#6bcB77; animation-delay:2s;"></div>
+<div class="confetti" style="left:70%; background:#4d96ff; animation-delay:3s;"></div>
+<div class="confetti" style="left:85%; background:#ff6b6b; animation-delay:4s;"></div> */
+
+/* ENVELOPE BASE */
+.envelope{
+    position:relative;
+    width:650px;
+    height:420px;
+}
+
+/* Envelope body */
+.envelope-body{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#ffecd2,#fcb69f);
+    border-radius:15px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+/* Envelope flap */
+.flap{
+    position:absolute;
+    top:-210px;
+    width:0;
+    height:0;
+    border-left:325px solid transparent;
+    border-right:325px solid transparent;
+    border-bottom:210px solid #fcb69f;
+    transform-origin:bottom;
+    transition:1s;
+}
+
+/* Text on envelope */
+.envelope-body h2{
+    font-size:40px;
+    color:#e80404;
+    font-family:'Playfair Display', serif;
+}
+
+.envelope-body small{
+    font-size:14px;
+    margin-top:15px;
+    color:#444;
+}
+
+/* Open flap */
+.open .flap{
+    transform:rotateX(180deg);
+}
+
+/* WAX SEAL */
+.seal{
+    position:absolute;
+    width:55px;
+    height:55px;
+    background:#9d0208;
+    border-radius:50%;
+    bottom:20px;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,0.4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+    color:white;
+}
+
+
+.seal:hover{
+    transform:scale(1.1);
+}
+
+/* LETTER PAPER */
+.letter{
+    position:absolute;
+    width:70vw;              /* Responsive width */
+    max-width:700px;
+    height:80vh;             /* Fits screen height */
+    max-height:600px;
+    background:#fffdf7;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,100%);
+    border-radius:20px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.4);
+    padding:50px;
+    box-sizing:border-box;
+    transition:1.5s;
+    z-index:-1;
+    overflow:auto;           /* Prevent text overflow */
+}
+
+
+/* Show letter */
+.letter.show{
+    transform:translate(-50%,-50%);
+    z-index:5;
+}
+
+
+/* Letter content */
+.letter h2{
+    font-family:'Playfair Display', serif;
+    font-size:40px;
+    text-align:center;
+    color:#d00000;
+}
+
+.letter p{
+    font-family:'Dancing Script', cursive;
+    font-size:32px;
+    line-height:1.8;
+    color:#333;
+    margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" id="envelope">
+
+    <div class="flap"></div>
+
+    <div class="envelope-body" onclick="openFlap()">
+        <h2>HAPPIEST BIRTHDAY RAH🎉</h2>
+        <small>click here to open letter</small>
+        <div class="seal" onclick="pullLetter(event)">❤️</div>
+    </div>
+
+</div>
+
+<div class="letter" id="letter">
+    <h2>Happy Birthday, Rah! 🎂🎉</h2>
+    <p>
+        
+<br><br>
+<h7>SCROLL DOWN......</h7>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<h7>SCROLL DOWN......</h7>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h7>scroll down.....</h7>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h7>SCROLL DOWN......</h7>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h7>Scroll down.....</h7>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h7>SCROLL DOWN......</h7>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h7>SCROLL DOWN....</h7>
+<br>
+<br>
+<br>
+<br>
+<h7><h7>SCROLL DOWN......</h7>......</h7>
+<br>
+<br>
+<h7>Are you ready....</h7>
+<br>
+<br>
+<br>
+<br>
+<br><h7><h7>SCROLL DOWN......</h7>......</h7>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<h7>Ready 1,2,3,......</h7>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br><h7><h7>SCROLL DOWN......</h7>......</h7>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<h7><h7>SCROLL DOWN......</h7>......</h7>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br><br><h7><h7>SCROLL DOWN......</h7>......</h7>
+<br>
+<br>
+<br>
+<br>
+<br><br><h7><h7>SCROLL DOWN......</h7>......</h7>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<h7>have some patience......</h7>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br><br><h7><h7>SCROLL DOWN......</h7>......</h7>
+<br>
+<br>
+<br>
+<br>
+<br><br><h7><h7>SCROLL DOWN......</h7>......</h7>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<h7>little more down.......</h7>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h7>Here it is...Read with smile</h7>
+<br>
+<br>
+<br>
+Intha scroll chesav ga..Heading marchipoye untav..Happiest birthday...😅
+I wish all your dreams come true and you achieve lots and lots of success ahead 🌟🚀
+May your future be as bright as your smile and as beautiful as your heart 🌈💖<br>
+(Edho biscuit le...Saradhaga annanu...Koncham nijame le😅😛)<br>
+We may not be that close yet, but you’ve given me such good vibes 🤗✨ Though we know each other since school days but just as person not as personality...Hey gap lo rhyming vacchesindhi...😄😄😄But now knowing more about you...😅
+I felt you are so obedient, genuine, and respectful (Note: Entha varaku correct annadhi naaku teledhu mari)—especially towards me 💛😊
+(I just felt it… nothing much 😄...Ekkuva feel avvaku...chadavalsindhi chaala undhi....😁)<br>
+
+And those good habits of yours?
+Hamma...I’m light-years away from them 🌌😂
+<br>
+You’re the only one who can actually dominate me with your talks 😲💬
+I am the usual nonstop chatterbox where no one can stop me if I start... 😜
+But you? OMG! You’re an even bigger one 🤭🤣
+I felt like sometimes you are the duplicate version of me in talks...😂🤣
+Even though we didn’t spend much time together,
+the moments we did share were truly amazing 💫💞
+Late-night talks 🌙💬
+Chats full of laughter 😂💙
+And especially your stories about your mom 😂❤️—I just loved them so much
+Total fun....😂Too good...😅
+I enjoy every conversation with you and laugh way too much 😆💖
+Sometimes, when you talk about morals and values,
+I feel like I’m talking to a completely different person 🌟🧠💫
+The maturity you show—despite being younger than me—
+That hits different 🥹👏
+<br>
+You’ve given me good thoughts and positive vibes 🌼✨
+And I truly feel lucky to have that 🤍
+<br>
+🌸
+Like stars that shine in silent skies,
+Your words bring warmth to cloudy nights.
+A gentle soul, a heart so true,
+This little bond feels special too 💫💞
+🌸 
+<br>
+Note:This poetic is copied from chatgpt and not my words...😂😅
+<br>
+Hoping this bond continues beautifully, just the way it is 🤝💖
+And grows stronger with time 🌱✨
+
+Once again,
+🎉🎂 Happy Birthday, Rah! 🎂🎉
+Stay amazing, stay blessed, and keep shining always 🌟💙💐
+
+💝😊✨
+    </p>
+</div>
+
+<script>
+function openFlap(){
+    document.getElementById("envelope").classList.add("open");
+}
+
+function pullLetter(event){
+    event.stopPropagation();
+    document.getElementById("letter").classList.add("show");
+}
+</script>
+
+</body>
+</html>
